@@ -17,7 +17,7 @@ def spider_data():
     return result.content
 
 
-def save_to_excel(datas):
+def save_to_excel(datas, save_path):
     try:
         workbook = xlwt.Workbook(encoding='utf-8')
         sheet = workbook.add_sheet('Hospital_Analysis')
@@ -36,8 +36,8 @@ def save_to_excel(datas):
             sheet.write(i, 6, product['PROVINCE'])
 
             i+=1
-        workbook.save('/Users/chenchaoran/Tools/hospital_data.xls')
-        print('File path: /Users/chenchaoran/Tools/hospital_data.xls')
+        workbook.save(save_path)
+        print('File path: ' + save_path)
     except Exception:
         print('failed!')
     pass
@@ -50,4 +50,5 @@ if __name__ == "__main__":
     datas = json.loads(result, encoding='utf-8')
     print datas['rows']
 
-    save_to_excel(datas['rows'])
+    _path = '/Users/chenchaoran/Tools/hospital_data.xls'
+    save_to_excel(datas['rows'], _path)
